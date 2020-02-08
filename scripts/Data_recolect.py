@@ -65,7 +65,7 @@ while True:
 
     elif data_Y >= 0.5: # press W for save image has termo
         izint = izint + 1
-    	Izquierda = 'Izquierda/izuierda' + str(izint) + '.jpg'
+    	Izquierda = 'Izquierda/izquierda' + str(izint) + '.jpg'
     	cv2.imwrite(filename=Izquierda, img=frame2)
     	print('Guardando Izquierda: ' + str(izint))
     	Giro = Giro - izint * 10
