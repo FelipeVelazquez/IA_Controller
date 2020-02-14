@@ -64,4 +64,8 @@ Imagen = np.asarray(Imagen)
 Velocidad = np.asarray(Velocidad)
 Direccion = np.asarray(Direccion)
 
+np.save('Imagenes.npy', Imagenes)
+np.save('Velocidad.npy', Velocidad)
+np.save('Direccion.npy', Direccion)
+
 Joy.close()
