@@ -9,37 +9,23 @@ import matplotlib.pyplot as plt
 import sys
 import xbox
 import maestro 
+from skimage.transform import resize
 
 
 cap = cv2.VideoCapture(0)
 joy = xbox.Joystick()
 servo = maestro.Controller()
 
-inputCommand = 0
-saveQ = 0
-name_img = 0
-
-Derecho = ''
-aint = 0
-
-Atras = ''
-atint = 0
-
-Izquierda = ''
-izint = 0
-
-Derecha = ''
-derint = 0
-
-data_X = 0.0
-data_y = 0.0
-
-Giro = 0.0
-
 servo.setTarget(0, 6000)
 servo.setTarget(1, 6000)
 
+count = 0
+
 vary = 6000
+
+Imagen = []
+Velocidad = []
+Direccion = []
 
 while Joy.Back() != 1:
     check, frame = cap.read()
@@ -54,7 +40,9 @@ while Joy.Back() != 1:
 
     gradosY = (data_Y * 3000) + 6000
     servo.setTarget(1, int(gradosY))
+
     print("Grados: " + str(int(gradosY)) + " Joy: " + str(data_Y))
+
     if data_Y >= 0.2:
     	vary = 6150
     elif data_Y < 0:
@@ -62,6 +50,18 @@ while Joy.Back() != 1:
     else:
     	vary = 6000
 
-    
+    count = count + 1
+
+    if count >= 10 and (data_Y != 0 or data_X != 0):
+    	rez_img = skimage.transform.resize(frame, (150, 150, 3),mode='constant',anti_aliasing=True)
+    	img_arr = np.asarray(rez_img)
+    	Imagen.append(img_arr)
+    	Velocidad.append(gradosY)
+    	Direccion.append(gradosX)
+    	count = 0
+
+Imagen = np.asarray(Imagen)
+Velocidad = np.asarray(Velocidad)
+Direccion = np.asarray(Direccion)
 
 Joy.close()
