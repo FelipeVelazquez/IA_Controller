@@ -41,7 +41,7 @@ def callback(data):
 	    bridge = CvBridge()
 	    frame = bridge.imgmsg_to_cv2(data, "bgr8")
 
-	    #data_X = joy.rigthX() # Izquierda y Derecha
+	    #data_X = joy.rightX() # Izquierda y Derecha
 	    #data_Y = joy.leftY() #Arriba y abajo o adelante y atras
 	    ser.write(b'1\n')
 	    data_XY = ser.readline()
