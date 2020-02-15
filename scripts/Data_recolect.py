@@ -34,7 +34,11 @@ Direccion = []
 ser = serial.Serial('/dev/ttyACM0')
 
 def callback(data):
-	if Joy.Back() != 1:
+	ser.write(b'1\n')
+	data_XYB = ser.readline()
+	(data_X, data_Y, B_button) = data_XYB.split(',')
+
+	if B_button != 1:
 	    #check, frame = cap.read()
 	    #frame2 = cv2.resize(frame, (640, 480), interpolation = cv2.INTER_AREA)
 	    #cv2.imshow('Webcam Video', frame2)
@@ -43,10 +47,7 @@ def callback(data):
 
 	    #data_X = joy.rightX() # Izquierda y Derecha
 	    #data_Y = joy.leftY() #Arriba y abajo o adelante y atras
-	    ser.write(b'1\n')
-	    data_XY = ser.readline()
-
-	    (data_X, data_Y) = data_XY.split(',')
+	    
 	    
 	    gradosX = (float(data_X) * 3000) + 6000
 	    servo.setTarget(0, int(gradosX))
