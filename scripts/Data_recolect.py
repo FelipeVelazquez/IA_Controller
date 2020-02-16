@@ -52,7 +52,7 @@ def callback(data):
 	    gradosX = (float(data_X) * 3000) + 6000
 	    servo.setTarget(0, int(gradosX))
 
-	    gradosY = (float(data_Y) * 3000) + 6000
+	    gradosY = (float(data_Y) * 50) + vary
 	    servo.setTarget(1, int(gradosY))
 
 	    print("Grados: " + str(int(gradosY)) + " Joy: " + str(data_Y))
